@@ -1,7 +1,6 @@
 input.onPinPressed(TouchPin.P0, function () {
     Interaction = 1
     basic.clearScreen()
-    basic.showNumber(forceMagnetique())
     Interaction = 0
 })
 function forceMagnetique () {
@@ -67,12 +66,19 @@ function TutorialCalibrage () {
 function ouvrir () {
     if (LaPorteEstOuverte == 0) {
         LaPorteEstOuverte = 1
-        Compteur += 1
-        datalogger.log(
-        datalogger.createCV("event", 3),
-        datalogger.createCV("counter", Compteur)
-        )
         music.startMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
+        if (MomentDeReactiverCompteur) {
+            if (input.runningTime() > MomentDeReactiverCompteur) {
+                MomentDeReactiverCompteur = 0
+            }
+        } else {
+            Compteur += 1
+            MomentDeReactiverCompteur = input.runningTime() + 50000
+            datalogger.log(
+            datalogger.createCV("event", 3),
+            datalogger.createCV("counter", Compteur)
+            )
+        }
     }
 }
 function Animation () {
@@ -117,11 +123,11 @@ function compteRebour () {
 }
 input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
     Interaction = 1
+    Compteur = 0
     datalogger.log(
     datalogger.createCV("event", 5),
     datalogger.createCV("counter", Compteur)
     )
-    Compteur = 0
     music.playSoundEffect(music.createSoundEffect(WaveShape.Triangle, 2112, 2095, 255, 0, 514, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), SoundExpressionPlayMode.InBackground)
     basic.showNumber(Compteur)
     basic.pause(2000)
@@ -131,7 +137,6 @@ input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
 input.onPinPressed(TouchPin.P2, function () {
     Interaction = 1
     basic.clearScreen()
-    basic.showNumber(ForceMagnetiqueVar)
     Interaction = 0
 })
 function aimantNonDétecté () {
@@ -202,7 +207,6 @@ function Calibrer () {
 input.onPinPressed(TouchPin.P1, function () {
     Interaction = 1
     basic.clearScreen()
-    basic.showNumber(ForceMagnetiqueAbs)
     Interaction = 0
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
@@ -224,8 +228,9 @@ function mouvements () {
 let DétectionTropSensible = 0
 let AccélérationRepos = 0
 let cptSaisieInvalide = 0
-let ForceMagnetiqueAbs = 0
 let ForceMagnetiqueVar = 0
+let ForceMagnetiqueAbs = 0
+let MomentDeReactiverCompteur = 0
 let LaPorteEstOuverte = 0
 let CalibrageTerminé = 0
 let tmp = 0
@@ -234,7 +239,7 @@ let InitSecretTerminé = 0
 let Interaction = 0
 let secret = 0
 let Compteur = 0
-music.setVolume(32)
+music.setVolume(255)
 led.setBrightness(16)
 pins.touchSetMode(TouchTarget.P0, TouchTargetMode.Capacitive)
 datalogger.setColumnTitles("event")
