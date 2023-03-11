@@ -37,6 +37,12 @@ datalogger.onLogFull(function () {
         # # # # #
         `)
 })
+function VersionFlash () {
+    music.startMelody(music.builtInMelody(Melodies.JumpUp), MelodyOptions.Once)
+    basic.showString("qCCzS")
+    basic.pause(2000)
+    basic.clearScreen()
+}
 function DéfinirSecret () {
     secret = tmp
     InitSecretTerminé = 1
@@ -233,7 +239,6 @@ let secret = 0
 let Compteur = 0
 music.setVolume(255)
 led.setBrightness(16)
-pins.touchSetMode(TouchTarget.P0, TouchTargetMode.Capacitive)
 datalogger.setColumnTitles("event")
 datalogger.setColumnTitles("counter")
 datalogger.includeTimestamp(FlashLogTimeStampFormat.Minutes)
@@ -245,6 +250,7 @@ input.setAccelerometerRange(AcceleratorRange.OneG)
 secret = 0
 Compteur = 0
 Animation()
+VersionFlash()
 TutorialSecret()
 TutorialCalibrage()
 loops.everyInterval(200, function () {
