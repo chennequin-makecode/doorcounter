@@ -67,18 +67,11 @@ function ouvrir () {
     if (LaPorteEstOuverte == 0) {
         LaPorteEstOuverte = 1
         music.startMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
-        if (MomentDeReactiverCompteur) {
-            if (input.runningTime() > MomentDeReactiverCompteur) {
-                MomentDeReactiverCompteur = 0
-            }
-        } else {
-            Compteur += 1
-            MomentDeReactiverCompteur = input.runningTime() + 50000
-            datalogger.log(
-            datalogger.createCV("event", 3),
-            datalogger.createCV("counter", Compteur)
-            )
-        }
+        Compteur += 1
+        datalogger.log(
+        datalogger.createCV("event", 3),
+        datalogger.createCV("counter", Compteur)
+        )
     }
 }
 function Animation () {
@@ -230,7 +223,6 @@ let AccélérationRepos = 0
 let cptSaisieInvalide = 0
 let ForceMagnetiqueVar = 0
 let ForceMagnetiqueAbs = 0
-let MomentDeReactiverCompteur = 0
 let LaPorteEstOuverte = 0
 let CalibrageTerminé = 0
 let tmp = 0
