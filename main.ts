@@ -1,5 +1,6 @@
 input.onPinPressed(TouchPin.P0, function () {
     Interaction = 1
+    basic.showNumber(forceMagnetique())
     basic.clearScreen()
     Interaction = 0
 })
@@ -197,6 +198,7 @@ function Calibrer () {
         }
         ForceMagnetiqueVar += 50
     }
+    ForceMagnetiqueVar += 50
     music.playSoundEffect(music.createSoundEffect(WaveShape.Triangle, 2112, 2095, 255, 0, 514, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), SoundExpressionPlayMode.UntilDone)
     basic.showIcon(IconNames.Yes)
     basic.pause(2000)
@@ -249,6 +251,7 @@ datalogger.createCV("counter", Compteur)
 input.setAccelerometerRange(AcceleratorRange.OneG)
 secret = 0
 Compteur = 0
+input.calibrateCompass()
 Animation()
 VersionFlash()
 TutorialSecret()
