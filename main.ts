@@ -251,7 +251,6 @@ datalogger.createCV("counter", Compteur)
 input.setAccelerometerRange(AcceleratorRange.OneG)
 secret = 0
 Compteur = 0
-input.calibrateCompass()
 Animation()
 VersionFlash()
 TutorialSecret()
