@@ -40,7 +40,7 @@ datalogger.onLogFull(function () {
 })
 function VersionFlash () {
     music.startMelody(music.builtInMelody(Melodies.JumpUp), MelodyOptions.Once)
-    basic.showString("qCCzS")
+    basic.showString("brx29")
     basic.pause(2000)
     basic.clearScreen()
 }
@@ -123,11 +123,6 @@ function compteRebour () {
 }
 input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
     Interaction = 1
-    Compteur = 0
-    datalogger.log(
-    datalogger.createCV("event", 5),
-    datalogger.createCV("counter", Compteur)
-    )
     music.playSoundEffect(music.createSoundEffect(WaveShape.Triangle, 2112, 2095, 255, 0, 514, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), SoundExpressionPlayMode.InBackground)
     basic.showNumber(Compteur)
     basic.pause(2000)
@@ -217,7 +212,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     } else {
         Interaction = 1
         music.playSoundEffect(music.createSoundEffect(WaveShape.Triangle, 2112, 2095, 255, 0, 514, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), SoundExpressionPlayMode.InBackground)
-        basic.showNumber(Compteur)
+        basic.showNumber(Compteur % 10)
         basic.pause(2000)
         basic.clearScreen()
         Interaction = 0
